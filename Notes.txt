@@ -1,0 +1,29 @@
+cmd
+    virtualenv env
+    cd scripts
+    activate (not in pycharm's terminal, doesn't work)
+    django-admin startproject mysite
+    django-admin startapp mysite
+
+    We'll be using some packages; Request, so we can send requests with python
+        pip install requests
+
+        Now we'll use beautifulsoup, used to pull data from html.
+            pip install beautifulsoup4
+
+
+py manage.py shell
+    import requests
+    page = requests.get('http://google.com')    This will fail if no internet connection.
+    from bs4 import BeautifulSoup (case sensitive)
+    soup = BeautifulSoup(page.text, 'html_parser')
+    print(soup.prettify)
+
+    Say we want this to look better, and grab every link on the page.
+    soup.find_all('a')
+    for link in soup.find_all('a'):
+        print(link)          (shift enter for new line in shell)
+    What if we specifically want the href links?
+    for link in soup.find_all('a'):
+        print(link.get('href'))
+    exit() to close shell
